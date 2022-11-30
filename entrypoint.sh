@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 if [ ! -z $INPUT_USERNAME ];
 then echo $INPUT_PASSWORD | docker login $INPUT_REGISTRY -u $INPUT_USERNAME --password-stdin
@@ -11,7 +11,7 @@ echo "make result dir"
 mkdir matos-iac-results-dir
 echo "before run: `ls`"
 echo "git repo: $INPUT_WORKING_DIR"
-exec docker run -v "/var/run/docker.sock":"/var/run/docker.sock" -v /$(pwd):/path cloudmatos/matos-iac-scan:latest scan -p /path/$INPUT_SCAN_DIR -o /path/matos-iac-results-dir
+exec docker run -v "/var/run/docker.sock":"/var/run/docker.sock" -v $(pwd):/path cloudmatos/matos-iac-scan:latest scan -p /path/$INPUT_SCAN_DIR -o /path/matos-iac-results-dir
 cd matos-iac-results-dir
 echo "after run: `ls`"
 
