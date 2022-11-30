@@ -13,3 +13,10 @@ echo "before run: `ls`"
 exec docker run -v "/var/run/docker.sock":"/var/run/docker.sock" -v $INPUT_WORKING_DIR:/path cloudmatos/matos-iac-scan:latest scan -p /path/$INPUT_SCAN_DIR -o /matos-iac-results-dir
 cd matos-iac-results-dir
 echo "after run: `ls`"
+
+echo "post scan result"
+jq -nc --argfile results "matos-iac-results-dir/results.json" --arg git_url "$GIT_URL" '{$results,$git_url}' |
+    curl -i \
+    -H "Accept: application/json" \
+    -H "Content-Type:application/json" \
+    -X POST -d @- "https://console.cloudmatos.dev/app/iac-scan/store"
