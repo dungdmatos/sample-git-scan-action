@@ -12,10 +12,9 @@ mkdir matos-iac-results-dir
 echo "before run: `ls`"
 echo "git repo: $INPUT_WORKING_DIR"
 # exec docker run -v "/var/run/docker.sock":"/var/run/docker.sock" -v $(pwd):/path cloudmatos/matos-iac-scan:latest scan -p /path/$INPUT_SCAN_DIR -o /path/matos-iac-results-dir
-docker run --rm -it -v $(pwd):/usr/src/project cloudmatos/matos-iac-scan:latest scan -p /usr/src/project/$INPUT_SCAN_DIR -o /usr/src/project/matos-iac-results-dir
+docker run --rm -v $(pwd):/usr/src/project cloudmatos/matos-iac-scan:latest scan -p /usr/src/project/$INPUT_SCAN_DIR -o /usr/src/project/matos-iac-results-dir
 cd matos-iac-results-dir
 echo "after run: `ls`"
-
 echo "post scan result"
 jq -nc --argfile results "matos-iac-results-dir/results.json" --arg git_url "$GIT_URL" '{$results,$git_url}' |
     curl -i \
