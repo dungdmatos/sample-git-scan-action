@@ -33,7 +33,7 @@ apk update && \
     apk upgrade && \
     apk add jq && apk add curl
 
-jq -nc --argfile results "results.json" --arg git_url "$GIT_URL" '{$results,$git_url}' |
+jq -nc --argfile results "results.json" --arg git_url "$GIT_URL_INPUT" '{$results,$git_url}' |
     curl -i \
     -H "Accept: application/json" \
     -H "X-Api-Key: $INPUT_API_KEY" \
