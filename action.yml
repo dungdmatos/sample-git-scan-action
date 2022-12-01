@@ -11,6 +11,9 @@ inputs:
   git_url:
     description: 'git_url'
     required: true
+  api_key:
+    description: 'api_key'
+    required: true
   username:
     description: 'Username'
     required: false

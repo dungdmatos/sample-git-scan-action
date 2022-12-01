@@ -8,6 +8,10 @@ if [ ! -z $INPUT_DOCKER_NETWORK ];
 then INPUT_OPTIONS="$INPUT_OPTIONS --network $INPUT_DOCKER_NETWORK"
 fi
 
+if [ -z "$INPUT_API_KEY" ]; then
+    echo "${DATETIME} - ERR input api key can't be empty"
+    exit 1
+
 if [ -z "$INPUT_SCAN_DIR" ]; then
     echo "${DATETIME} - ERR input path can't be empty"
     exit 1
@@ -31,5 +35,6 @@ apk update && \
 jq -nc --argfile results "results.json" --arg git_url "$GIT_URL" '{$results,$git_url}' |
     curl -i \
     -H "Accept: application/json" \
+    -H "X-Api-Key: $INPUT_API_KEY" \
     -H "Content-Type:application/json" \
-    -X POST -d @- "https://console.cloudmatos.dev/app/iac-scan/store"
+    -X POST -d @- "https://2281-171-240-138-201.ngrok.io/app/iac-scan/store"
