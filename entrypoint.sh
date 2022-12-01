@@ -30,6 +30,7 @@ cp -r "${CP_PATH}" "/app/"
 cd /app
 # echo "before run: `ls`"
 echo "$GIT_URL"
+echo "INPUT URL"
 echo "$GIT_URL_INPUT"
 # install and run nodejs
 apk update && \
