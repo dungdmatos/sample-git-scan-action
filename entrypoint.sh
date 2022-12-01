@@ -18,14 +18,11 @@ fi
 CP_PATH="./results.json"
 OUTPUT_PATH_PARAM="-o ./"
 cd $GITHUB_WORKSPACE
-# exec docker run -v "/var/run/docker.sock":"/var/run/docker.sock" -v $(pwd):/path cloudmatos/matos-iac-scan:latest scan -p /path/$INPUT_SCAN_DIR -o /path/matos-iac-results-dir
-# docker run --rm -v $(pwd):/usr/src/project cloudmatos/matos-iac-scan:latest scan -p /usr/src/project/templates -o /usr/src/project/matos-iac-results-dir
-
-/app/bin/kics scan $INPUT_PARAM $OUTPUT_PATH_PARAM
+/app/bin/kics scan --no-progress $INPUT_PARAM $OUTPUT_PATH_PARAM
 
 cp -r "${CP_PATH}" "/app/"
 cd /app
-echo "before run: `ls`"
+# echo "before run: `ls`"
 # install and run nodejs
 apk update && \
     apk upgrade && \
