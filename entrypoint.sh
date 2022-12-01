@@ -25,15 +25,17 @@ OUTPUT_PATH_PARAM="-o ./"
 cd $GITHUB_WORKSPACE
 /app/bin/kics scan --no-progress $INPUT_PARAM $OUTPUT_PATH_PARAM
 
+GIT_URL = "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY"
 cp -r "${CP_PATH}" "/app/"
 cd /app
 # echo "before run: `ls`"
+echo $GIT_URL
 # install and run nodejs
 apk update && \
     apk upgrade && \
     apk add jq && apk add curl
 
-jq -nc --argfile results "results.json" --arg git_url "$GIT_URL_INPUT" '{$results,$git_url}' |
+jq -nc --argfile results "results.json" --arg git_url "$GIT_URL" '{$results,$git_url}' |
     curl -i \
     -H "Accept: application/json" \
     -H "X-Api-Key: $INPUT_API_KEY" \
