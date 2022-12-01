@@ -11,6 +11,7 @@ fi
 if [ -z "$INPUT_API_KEY" ]; then
     echo "${DATETIME} - ERR input api key can't be empty"
     exit 1
+fi
 
 if [ -z "$INPUT_SCAN_DIR" ]; then
     echo "${DATETIME} - ERR input path can't be empty"
