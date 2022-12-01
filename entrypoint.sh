@@ -25,11 +25,12 @@ OUTPUT_PATH_PARAM="-o ./"
 cd $GITHUB_WORKSPACE
 /app/bin/kics scan --no-progress $INPUT_PARAM $OUTPUT_PATH_PARAM
 
-GIT_URL = "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY"
+GIT_URL="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY"
 cp -r "${CP_PATH}" "/app/"
 cd /app
 # echo "before run: `ls`"
-echo $GIT_URL
+echo "$GIT_URL"
+echo "$GIT_URL_INPUT"
 # install and run nodejs
 apk update && \
     apk upgrade && \
